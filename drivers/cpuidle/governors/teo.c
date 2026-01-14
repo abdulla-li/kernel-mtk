@@ -476,7 +476,7 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 	 * total wakeup events, do not stop the tick.
 	 */
 	if (drv->states[idx].target_residency_ns < TICK_NSEC &&
-	    cpu_data->tick_intercepts > cpu_data->total / 2 + cpu_data->total / 8)
+	    3 * cpu_data->tick_intercepts >= 2 * cpu_data->total)
 		duration_ns = TICK_NSEC / 2;
 
 end:
